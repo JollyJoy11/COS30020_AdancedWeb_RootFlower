@@ -36,7 +36,8 @@ if (isset($_POST['register'])) {
         $date = DateTime::createFromFormat('Y-m-d', $dob);
         $dateErrors = DateTime::getLastErrors();
 
-        if (!$date || $dateErrors['warning_count'] > 0 || $dateErrors['error_count'] > 0 || $date > new DateTime()) {
+        $hasDateErrors = is_array($dateErrors) && ($dateErrors['warning_count'] > 0 || $dateErrors['error_count'] > 0);
+        if (!$date || $hasDateErrors || $date > new DateTime()) {
             $errors['dob'] = "* Invalid date of birth.";
         }
     } 
