@@ -28,7 +28,6 @@ A PHP web application for a flower arrangement shop, built for COS30020 Advanced
 | Role  | Email | Password |
 |-------|-------|----------|
 | Admin | admin@swin.edu.my | admin |
-| User  | joannecjx.0111@gmail.com | qwer1234! |
 
 ## Notes
 
