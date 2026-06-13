@@ -30,4 +30,8 @@ RUN chown -R www-data:www-data /var/www/html \
                     /var/www/html/studentworks \
                     /var/www/html/pdfparser
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 EXPOSE 80
+CMD ["/entrypoint.sh"]

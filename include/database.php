@@ -1,14 +1,16 @@
-<?php 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "RootFlower";
+<?php
+    $servername = getenv('MYSQLHOST')     ?: 'localhost';
+    $username   = getenv('MYSQLUSER')     ?: 'root';
+    $password   = getenv('MYSQLPASSWORD') ?: '';
+    $dbname     = getenv('MYSQLDATABASE') ?: 'RootFlower';
+    $port       = (int)(getenv('MYSQLPORT') ?: 3306);
 
-    //Create database
-    $conn =  mysqli_connect($servername, $username, $password);
-    $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
-    mysqli_query($conn, $sql);
-    mysqli_close($conn);
+    // Create database only when running locally (Railway already provisions one)
+    $conn = mysqli_connect($servername, $username, $password, '', $port);
+    if ($conn) {
+        mysqli_query($conn, "CREATE DATABASE IF NOT EXISTS `$dbname`");
+        mysqli_close($conn);
+    }
 
     include("db_connect.php");
 
