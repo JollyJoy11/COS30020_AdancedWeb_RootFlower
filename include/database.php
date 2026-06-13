@@ -150,6 +150,26 @@
             is_read TINYINT(1) DEFAULT 0 NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
             FOREIGN KEY (email) REFERENCES user_table(email)
+                ON DELETE CASCADE ON UPDATE CASCADE)",
+
+        "CREATE TABLE IF NOT EXISTS orders_table (
+            id INT(6) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL PRIMARY KEY,
+            email VARCHAR(50) NOT NULL,
+            total DECIMAL(10,2) NOT NULL,
+            status ENUM('pending','processing','completed','cancelled') DEFAULT 'pending',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (email) REFERENCES user_table(email)
+                ON DELETE CASCADE ON UPDATE CASCADE)",
+
+        "CREATE TABLE IF NOT EXISTS order_items_table (
+            id INT(6) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL PRIMARY KEY,
+            order_id INT(6) UNSIGNED ZEROFILL NOT NULL,
+            product_id INT(4) UNSIGNED ZEROFILL NOT NULL,
+            product_name VARCHAR(100) NOT NULL,
+            price DECIMAL(10,2) NOT NULL,
+            qty INT(3) NOT NULL,
+            image VARCHAR(100) NULL,
+            FOREIGN KEY (order_id) REFERENCES orders_table(id)
                 ON DELETE CASCADE ON UPDATE CASCADE)"
     ];
 

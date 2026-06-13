@@ -1,5 +1,15 @@
 <?php
-    echo 
+    $cartCount = 0;
+    if (!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $item) {
+            $cartCount += $item['qty'];
+        }
+    }
+    $cartBadge = $cartCount > 0
+        ? "<span class='position-absolute badge rounded-pill bg-danger noti-badge'>$cartCount</span>"
+        : "";
+
+    echo
     "<input type='checkbox' id='nav-toggle' class='d-lg-none' hidden>
     <label for='nav-toggle' class='position-fixed px-2 py-1 rounded-end text-light d-flex align-items-center justify-content-center d-lg-none'>
         <i class='bi bi-chevron-double-right'></i>
@@ -193,7 +203,7 @@
                     <li><a class='dropdown-item' href='logout.php'>Log Out <i class='bi bi-box-arrow-right'></i></a></li>
                 </ul>
             </li>
-            <li class='nav-item'><a href='cart.php' class='nav-link text-secondary pb-0'><i class='bi bi-basket'></i></a></li>
+            <li class='nav-item'><a href='cart.php' class='nav-link text-secondary pb-0 position-relative'><i class='bi bi-basket'></i>$cartBadge</a></li>
         </ul>
     </header>";
 

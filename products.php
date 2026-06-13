@@ -169,7 +169,11 @@ $selectedCategory = $_GET['product'] ?? '';
 
 									echo "</div>
 										
-										<a href='#' class='btn btn-primary mt-auto w-100'>Add to Basket</a>
+										<form method='POST' action='add_to_cart.php' class='mt-auto w-100'>
+											<input type='hidden' name='product_id' value='{$row['id']}'>
+											<input type='hidden' name='redirect' value='products.php" . ($selectedCategory ? "?product=$selectedCategory" : "") . "'>
+											<button type='submit' class='btn btn-primary w-100'>Add to Basket</button>
+										</form>
 									</div>
 								</div>
 							</div>";
