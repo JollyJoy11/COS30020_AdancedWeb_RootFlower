@@ -2,6 +2,8 @@
 
 A PHP web application for a flower arrangement shop, built for COS30020 Advanced Web Technologies (Swinburne University).
 
+**Live demo:** https://cos30020adancedwebrootflower-production.up.railway.app
+
 ## Features
 
 - **Shop** — browse and add flower products to cart, place orders
@@ -14,45 +16,21 @@ A PHP web application for a flower arrangement shop, built for COS30020 Advanced
 
 ## Tech Stack
 
-- PHP 8.x (procedural)
+- PHP 8.2 (procedural)
 - MySQL
-- HTML/CSS/JavaScript (vanilla)
+- HTML / CSS / JavaScript (vanilla)
 - [PHPMailer](https://github.com/PHPMailer/PHPMailer) — password reset emails
 - [TCPDF](https://tcpdf.org/) — PDF generation
+- Hosted on [Railway](https://railway.app)
 
-## Setup
+## Demo Credentials
 
-### Requirements
+| Role  | Email | Password |
+|-------|-------|----------|
+| Admin | admin@swin.edu.my | admin |
+| User  | joannecjx.0111@gmail.com | qwer1234! |
 
-- [XAMPP](https://www.apachefriends.org/) (Apache + MySQL + PHP)
+## Notes
 
-### Installation
-
-1. Clone the repository into your XAMPP `htdocs` folder:
-   ```
-   git clone https://github.com/<your-username>/COS30020_AdancedWeb_RootFlower.git xampp/htdocs/assign2
-   ```
-
-2. Start **Apache** and **MySQL** in the XAMPP Control Panel.
-
-3. Open [phpMyAdmin](http://localhost/phpmyadmin) and create a database named `RootFlower`.
-
-4. Import the provided SQL dump:
-   - In phpMyAdmin, select the `RootFlower` database → **Import** → choose the `.sql` file.
-
-5. The database connection in [include/db_connect.php](include/db_connect.php) uses the default XAMPP credentials (`root` / no password). Update if yours differ.
-
-6. Open [http://localhost/assign2](http://localhost/assign2) in your browser.
-
-### Placeholder folders
-
-The following upload directories are excluded from version control. Create them if they don't exist:
-
-```
-mkdir ar
-mkdir profile_images
-mkdir studentworks
-mkdir pdfparser
-```
-
-The `profile_images` folder ships with `default.png`, `boy.png`, and `girl.png` as defaults.
+- File uploads (profile images, student works, AR arrangements) reset on redeploy as Railway uses an ephemeral filesystem.
+- PHPMailer requires SMTP credentials set as environment variables to send emails on the live deployment.
