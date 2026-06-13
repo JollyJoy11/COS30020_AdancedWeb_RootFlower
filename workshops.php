@@ -54,7 +54,14 @@ $today = date("Y-m-d");
 					}
 				}
 
-				$times = explode(" - ", $upcoming['time']); 
+				// Fallback to last session if all dates have passed
+				if ($upcoming === null) {
+					$lastIdx = array_key_last($workshop['schedule']);
+					$upcoming = $workshop['schedule'][$lastIdx];
+					$sessionIndex = $lastIdx;
+				}
+
+				$times = explode(" - ", $upcoming['time']);
 				?>
 
 				<!-- Image & date grid -->
