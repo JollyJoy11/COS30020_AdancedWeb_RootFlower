@@ -13,12 +13,12 @@ foreach ($users as $u) {
     $result = mysqli_query($conn, $check);
 
     if (mysqli_num_rows($result) == 0) {
-        $fname = mysqli_real_escape_string($conn, $u[1]);
-        $lname = mysqli_real_escape_string($conn, $u[2]);
-        $dob = mysqli_real_escape_string($conn, $u[3]);
-        $gender = mysqli_real_escape_string($conn, $u[4]);
+        $fname    = mysqli_real_escape_string($conn, $u[1]);
+        $lname    = mysqli_real_escape_string($conn, $u[2]);
+        $dob_sql  = ($u[3] === null) ? 'NULL' : "'" . mysqli_real_escape_string($conn, $u[3]) . "'";
+        $gender   = mysqli_real_escape_string($conn, $u[4]);
         $hometown = mysqli_real_escape_string($conn, $u[5]);
-        $query = "INSERT INTO user_table (email, first_name, last_name, dob, gender, hometown) VALUES ('$u[0]', '$u[1]', '$u[2]', '$u[3]', '$u[4]', '$u[5]')";
+        $query = "INSERT INTO user_table (email, first_name, last_name, dob, gender, hometown) VALUES ('$u[0]', '$fname', '$lname', $dob_sql, '$gender', '$hometown')";
         mysqli_query($conn, $query);
     }
 }
