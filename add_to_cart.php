@@ -25,7 +25,7 @@ if (isset($_POST['product_id'])) {
                 'qty'   => 1
             ];
         }
-        $_SESSION['alert'] = ['success' => '<strong>' . htmlspecialchars($row['product_name']) . '</strong> added to your basket.'];
+        $_SESSION['alert'] = ['success' => '<strong>' . htmlspecialchars($row['product_name']) . ' </strong> added to your basket.'];
     }
 }
 

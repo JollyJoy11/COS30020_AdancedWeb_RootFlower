@@ -201,9 +201,9 @@ $articleClass = empty($cart)
                             <span><?= $delivery == 0 ? '<span class="text-success">FREE</span>' : 'RM ' . number_format($delivery, 2) ?></span>
                         </div>
                         <?php if ($remaining > 0): ?>
-                        <p class="small mb-3" style="color:#978475">Add RM <?= number_format($remaining, 2) ?> more for free delivery</p>
+                            <p class="small mb-3 text-center" style="color:#978475">Add RM <?= number_format($remaining, 2) ?> more for free delivery</p>
                         <?php else: ?>
-                        <p class="small mb-3 text-success">You qualify for free delivery!</p>
+                            <p class="small mb-3 text-success text-center">You qualify for free delivery!</p>
                         <?php endif; ?>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold mb-4">
