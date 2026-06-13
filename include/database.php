@@ -179,7 +179,11 @@
     }
 
     // Add delivery column to orders_table if it doesn't exist (for existing deployments)
-    mysqli_query($conn, "ALTER TABLE orders_table ADD COLUMN IF NOT EXISTS delivery DECIMAL(10,2) NOT NULL DEFAULT 20.00");
+    $col_check = mysqli_query($conn, "SELECT COUNT(*) as cnt FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'orders_table' AND COLUMN_NAME = 'delivery'");
+    $col_row = mysqli_fetch_assoc($col_check);
+    if ($col_row['cnt'] == 0) {
+        mysqli_query($conn, "ALTER TABLE orders_table ADD COLUMN delivery DECIMAL(10,2) NOT NULL DEFAULT 20.00");
+    }
 
     // Create trigger for soft delete
     $soft_delete_trigger_exists = false;
