@@ -49,6 +49,10 @@ $selectedCategory = $_GET['product'] ?? '';
 <body class="fs-5">
 	<?php include "include/header.php"; ?>
 
+    <div class="py-2 px-4 text-center small border-bottom" style="background-color:#f5ede8;">
+        <i class="bi bi-truck me-1"></i> Enjoy <strong>free delivery</strong> on orders above <strong>RM 300</strong>. Standard delivery is RM 20.
+    </div>
+
     <article class="text-secondary p-4 p-md-5 row w-100 g-3">
 		<!-- Large Screen Filter -->
 		<aside class="fs-6 col-2 pt-5 mt-5 sticky-top d-none d-md-block z-0">
@@ -72,9 +76,6 @@ $selectedCategory = $_GET['product'] ?? '';
 		</aside>
 
 		<div class="col-12 col-md-10 ps-md-5">
-			<div class="py-2 px-3 text-center small mb-3 border" style="background-color:#f5ede8;">
-				<i class="bi bi-truck me-1"></i> Enjoy <strong>free delivery</strong> on orders above <strong>RM 300</strong>. Standard delivery is RM 20.
-			</div>
 			<div class="d-flex justify-content-between">
 				<h1>Products<?php echo $selectedCategory ? "<span class='fs-4'>&ensp;/&ensp;".($categoryNames[$selectedCategory] ?? '')."</span>" : ""; ?></h1>
 				<!-- Small Screen Filter Dropdown Button -->
