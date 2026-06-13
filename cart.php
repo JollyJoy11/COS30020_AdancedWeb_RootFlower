@@ -38,13 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($action === 'checkout' && !empty($_SESSION['cart'])) {
-        $email = mysqli_real_escape_string($conn, $_SESSION['user']);
-        $total = 0;
+        $email    = mysqli_real_escape_string($conn, $_SESSION['user']);
+        $subtotal = 0;
         foreach ($_SESSION['cart'] as $item) {
-            $total += $item['price'] * $item['qty'];
+            $subtotal += $item['price'] * $item['qty'];
         }
+        $delivery    = $subtotal >= 300 ? 0 : 20;
+        $grand_total = $subtotal + $delivery;
 
-        mysqli_query($conn, "INSERT INTO orders_table (email, total) VALUES ('$email', $total)");
+        mysqli_query($conn, "INSERT INTO orders_table (email, total, delivery) VALUES ('$email', $grand_total, $delivery)");
         $order_id = mysqli_insert_id($conn);
 
         foreach ($_SESSION['cart'] as $item) {
@@ -54,21 +56,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES ($order_id, {$item['id']}, '$name', {$item['price']}, {$item['qty']}, '$image')");
         }
 
+        // Build and send receipt email
+        $orderNum  = str_pad($order_id, 6, '0', STR_PAD_LEFT);
+        $itemLines = "";
+        foreach ($_SESSION['cart'] as $item) {
+            $itemLines .= "  - " . $item['name'] . " x" . $item['qty'] . "  —  RM " . number_format($item['price'] * $item['qty'], 2) . "\n";
+        }
+        $deliveryLine  = $delivery == 0 ? "FREE (order above RM 300)" : "RM " . number_format($delivery, 2);
+        $receiptBody   =
+            "Hi " . $_SESSION['name'] . ",\n\n" .
+            "Thank you for your order! Here's your receipt:\n\n" .
+            "Order #: $orderNum\n" .
+            "Date   : " . date('d M Y') . "\n\n" .
+            "Items:\n$itemLines\n" .
+            "Subtotal : RM " . number_format($subtotal, 2) . "\n" .
+            "Delivery : $deliveryLine\n" .
+            "Total    : RM " . number_format($grand_total, 2) . "\n\n" .
+            "We'll process your order soon. Thank you for shopping with Root Flower!\n\n" .
+            "Root Flower Team";
+
+        sendEmail($_SESSION['user'], "Your Root Flower Order #$orderNum", $receiptBody);
+
         $_SESSION['cart'] = [];
-        $_SESSION['alert'] = ['success' => 'Your order has been placed! Thank you for shopping with Root Flower.'];
+        $_SESSION['alert'] = ['success' => 'Your order has been placed! A receipt has been sent to your email.'];
         mysqli_close($conn);
         header('Location: order_history.php');
         exit;
     }
 }
 
-$cart  = $_SESSION['cart'] ?? [];
-$total = 0;
-$count = 0;
+$cart     = $_SESSION['cart'] ?? [];
+$total    = 0;
+$count    = 0;
 foreach ($cart as $item) {
     $total += $item['price'] * $item['qty'];
     $count += $item['qty'];
 }
+$delivery    = $total >= 300 ? 0 : 20;
+$grand_total = $total + $delivery;
+$remaining   = max(0, 300 - $total);
 
 mysqli_close($conn);
 
@@ -170,14 +196,19 @@ $articleClass = empty($cart)
                             <span>Subtotal (<?= $count ?> item<?= $count !== 1 ? 's' : '' ?>)</span>
                             <span>RM <?= number_format($total, 2) ?></span>
                         </div>
-                        <div class="d-flex justify-content-between mb-3 fs-6">
-                            <span class="text-muted">Delivery</span>
-                            <span class="text-muted small">Calculated at checkout</span>
+                        <div class="d-flex justify-content-between mb-1 fs-6">
+                            <span>Delivery</span>
+                            <span><?= $delivery == 0 ? '<span class="text-success">FREE</span>' : 'RM ' . number_format($delivery, 2) ?></span>
                         </div>
+                        <?php if ($remaining > 0): ?>
+                        <p class="small mb-3" style="color:#978475">Add RM <?= number_format($remaining, 2) ?> more for free delivery</p>
+                        <?php else: ?>
+                        <p class="small mb-3 text-success">You qualify for free delivery!</p>
+                        <?php endif; ?>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold mb-4">
                             <span>Total</span>
-                            <span>RM <?= number_format($total, 2) ?></span>
+                            <span>RM <?= number_format($grand_total, 2) ?></span>
                         </div>
 
                         <form method="POST" action="cart.php">

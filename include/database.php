@@ -156,6 +156,7 @@
             id INT(6) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL PRIMARY KEY,
             email VARCHAR(50) NOT NULL,
             total DECIMAL(10,2) NOT NULL,
+            delivery DECIMAL(10,2) NOT NULL DEFAULT 20.00,
             status ENUM('pending','processing','completed','cancelled') DEFAULT 'pending',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (email) REFERENCES user_table(email)
@@ -176,6 +177,9 @@
     foreach ($table as $query) {
         mysqli_query($conn, $query);
     }
+
+    // Add delivery column to orders_table if it doesn't exist (for existing deployments)
+    mysqli_query($conn, "ALTER TABLE orders_table ADD COLUMN IF NOT EXISTS delivery DECIMAL(10,2) NOT NULL DEFAULT 20.00");
 
     // Create trigger for soft delete
     $soft_delete_trigger_exists = false;

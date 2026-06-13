@@ -49,6 +49,19 @@ $selectedCategory = $_GET['product'] ?? '';
 <body class="fs-5">
 	<?php include "include/header.php"; ?>
 
+    <div id="delivery-banner" class="alert alert-dismissible fade show py-2 px-4 text-center small mb-0 border-0 border-bottom" style="background-color:#f5ede8;border-radius:0;">
+        <i class="bi bi-truck me-1"></i> Enjoy <strong>free delivery</strong> on orders above <strong>RM 300</strong>. Standard delivery is RM 20.
+        <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <script>
+        if (sessionStorage.getItem('deliveryBannerDismissed')) {
+            document.getElementById('delivery-banner').remove();
+        }
+        document.getElementById('delivery-banner')?.addEventListener('closed.bs.alert', () => {
+            sessionStorage.setItem('deliveryBannerDismissed', '1');
+        });
+    </script>
+
     <article class="text-secondary p-4 p-md-5 row w-100 g-3">
 		<!-- Large Screen Filter -->
 		<aside class="fs-6 col-2 pt-5 mt-5 sticky-top d-none d-md-block z-0">

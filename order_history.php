@@ -75,7 +75,7 @@ $articleClass = empty($orders)
                         <strong><?= date('d M Y', strtotime($order['created_at'])) ?></strong>
                     </div>
                     <div class="fs-6">
-                        <span class="text-muted small">Total</span><br>
+                        <span class="text-muted small">Total (incl. delivery)</span><br>
                         <strong>RM <?= number_format($order['total'], 2) ?></strong>
                     </div>
                     <div class="fs-6">
