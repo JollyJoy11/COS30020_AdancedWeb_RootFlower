@@ -15,14 +15,7 @@ profile_images/*.webp
 !profile_images/default.png
 !profile_images/boy.png
 !profile_images/girl.png
-studentworks/*.jpg
-studentworks/*.jpeg
-studentworks/*.png
-studentworks/*.gif
-studentworks/*.webp
-studentworks/*.mp4
-studentworks/*.mov
-studentworks/*.avi
+# studentworks/ is tracked — contains seeded demo data
 
 # Generated PDFs
 pdfparser/generated_*.pdf
