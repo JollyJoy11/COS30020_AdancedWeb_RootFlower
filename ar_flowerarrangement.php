@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<!-- Description: AR Arrangement -->
+<!-- Description: Touchless Floral Arrangement -->
 <!-- Author: Joanne Chin Jia Xuan -->
 <!-- Date: 28/11/2025 -->
 <!-- Validated: OK 6/12/2025 -->
 
 <head>
-    <title>AR Floral Arrangement | Root Flower</title>
+    <title>Touchless Floral Arrangement | Root Flower</title>
 	<meta charset="utf-8"/>
 	<meta name="author" content="Joanne Chin Jia Xuan"/>
 	<meta name="description" content="Root Flower is a creative florist hub offering fresh floral products, inspiring workshops, and a platform for students to showcase their floral artistry. Discover, learn, and create with us.">
@@ -30,7 +30,7 @@
     <!-- Loading Screen -->
     <div id="loading-screen" class="w-100 h-100 position-absolute top-0 start-0 d-flex flex-column justify-content-center align-items-center bg-light">
         <img src="img/rootflower.jpg" alt="Root Flower Logo">
-        <p class="mb-4 fs-1">Root Flower AR Florist</p>
+        <p class="mb-4 fs-1">Root Flower Touchless Florist</p>
         <p class="text-secondary">Loading AI Models & 3D Engine...</p>
         <div class="w-50 bg-secondary-subtle rounded-pill overflow-hidden">
             <div id="loading-bar" class="h-100 bg-warning"></div>
@@ -45,7 +45,8 @@
 
     <!-- UI Sidebar -->
     <div id="ui-sidebar" class="glass-panel rounded position-absolute h-100 overflow-y-auto">
-        <h1 class="fs-5 fw-bold d-flex align-items-center gap-2 mb-3">🌸 AR Florist Studio</h1>
+        <h1 class="fs-5 fw-bold d-flex align-items-center gap-2 mb-3">🌸 Touchless Florist Studio</h1>
+        <p class="small text-secondary mb-3">Create floral arrangements using touchless gesture control and vision-based HCI with your webcam.</p>
 
         <!-- AI Assistant Section -->
         <div class="glass-panel rounded ai-panel p-3 mb-3">

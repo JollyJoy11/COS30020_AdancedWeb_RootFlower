@@ -1,6 +1,6 @@
 # RootFlower
 
-RootFlower is a PHP-based florist web application that combines e-commerce, creative tools, and community features into one experience. It was developed as part of COS30020 Advanced Web Technologies and showcases a complete online flower shop with user accounts, workshop bookings, an AR-inspired arrangement builder, and an admin dashboard.
+RootFlower is a PHP-based florist web application that combines e-commerce, creative tools, and community features into one experience. It was developed as part of COS30020 Advanced Web Technologies and showcases a complete online flower shop with user accounts, workshop bookings, a touchless gesture-controlled arrangement experience, and an admin dashboard.
 
 Live demo: https://cos30020adancedwebrootflower-production.up.railway.app
 
@@ -12,7 +12,7 @@ RootFlower gives registered users a way to:
 - add items to a shopping cart and place orders
 - view order history and manage their profile
 - register for florist workshops and view upcoming sessions
-- design and save their own floral arrangements using the AR flower arrangement tool
+- design and save their own floral arrangements using a touchless, vision-based floral studio
 - contribute flower information by uploading a PDF description and receiving a downloadable generated PDF
 - upload and explore student floral creations in the gallery
 - subscribe to newsletters and receive account-related emails
@@ -23,7 +23,7 @@ RootFlower gives registered users a way to:
 - Cart and order flow with order confirmation emails and saved order history
 - Flower contribution flow that extracts PDF descriptions and generates downloadable PDFs
 - Workshop registration with session-based booking information
-- AR Flower Arranger for creating virtual floral arrangements
+- Touchless gesture-controlled floral studio for creating virtual arrangements through vision-based HCI
 - Student Works gallery for showcasing student creations
 - User account system with login, registration, password reset, and profile updates
 - Admin panel for managing products, workshops, student works, accounts, and subscribers
@@ -58,3 +58,4 @@ A sample admin account is available for testing:
 - Email features require valid SMTP settings in the environment or server configuration.
 - Order confirmations are sent by email rather than as downloadable PDF receipts.
 - The site is designed as a university project and focuses on demonstrating web development concepts, database interaction, and user role management.
+- The flower arrangement experience is based on touchless gesture control and vision-based human-computer interaction.
