@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES ($order_id, {$item['id']}, '$name', {$item['price']}, {$item['qty']}, '$image')");
         }
 
-        // Build and send receipt email
+        // Build and send order confirmation email
         $orderNum  = str_pad($order_id, 6, '0', STR_PAD_LEFT);
         $itemLines = "";
         foreach ($_SESSION['cart'] as $item) {
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $deliveryLine  = $delivery == 0 ? "FREE (order above RM 300)" : "RM " . number_format($delivery, 2);
         $receiptBody   =
             "Hi " . $_SESSION['name'] . ",\n\n" .
-            "Thank you for your order! Here's your receipt:\n\n" .
+            "Thank you for your order! Here's your order confirmation:\n\n" .
             "Order #: $orderNum\n" .
             "Date   : " . date('d M Y') . "\n\n" .
             "Items:\n$itemLines\n" .
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendEmail($_SESSION['user'], "Your Root Flower Order #$orderNum", $receiptBody);
 
         $_SESSION['cart'] = [];
-        $_SESSION['alert'] = ['success' => 'Your order has been placed! A receipt has been sent to your email.'];
+        $_SESSION['alert'] = ['success' => 'Your order has been placed! A confirmation email with your order details has been sent to your inbox.'];
         mysqli_close($conn);
         header('Location: order_history.php');
         exit;
